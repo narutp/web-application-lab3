@@ -1,0 +1,39 @@
+{
+    "items": [
+        {
+            "question": "2 + 2",
+            "choice1": 3,
+            "choice2": 5,
+            "choice3": 4,
+            "answer": 4
+        },
+        {
+            "question": "5 + 5",
+            "choice1": 10,
+            "choice2": 15,
+            "choice3": 12,
+            "answer": 10
+        },
+        {
+            "question": "10 - 2",
+            "choice1": 3,
+            "choice2": 4,
+            "choice3": 8,
+            "answer": 8
+        },
+        {
+            "question": "10 * 2",
+            "choice1": 23,
+            "choice2": 24,
+            "choice3": 20,
+            "answer": 20
+        },
+        {
+            "question": "10 / 2",
+            "choice1": 3,
+            "choice2": 5,
+            "choice3": 3,
+            "answer": 5
+        }
+    ]
+}

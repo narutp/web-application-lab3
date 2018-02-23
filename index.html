@@ -1,12 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Web application lab3</title>
     </head>
     <body>
-        
+        <button onclick="question(5)">
+            5
+        </button>
+        <button onclick="question(10)">
+            10
+        </button>
+        <button onclick="question(15)">
+            15
+        </button>
+        <div class="gameplay">
+            <div id="question">
+                
+            </div><hr>
+            <input id="answer" type="text">
+            <button id="1">
+
+            </button>
+        </div>
     </body>
+    <script>
+        let randomNumber = 0;
+        let numberQuestion = 0;
+        let score = 0;
+        let questionArr = [];
+        let answerArr = [];
+        function question(params) {
+            numberQuestion = params
+            
+            while (numberQuestion > 0) {
+                $.get('list.json', function(data) {
+                    for (let i = 0 ; i < data.items.length ; i++) {
+                        questionArr[i] = data.items[i].question    
+                    }
+                    let randomQuestionNumber = getRandomInt(0, questionArr.length)
+                    document.getElementById('question').innerHTML = questionArr[randomQuestionNumber]
+                    questionArr.splice(randomQuestionNumber, 1)
+                });
+                numberQuestion--;
+            }
+        }
+        function submit() {
+            $.get('list.json', function(data) {
+                if ($('#answer').val() == data.items[randomNumber].answer) {
+                    
+                } else {
+                    console.log('false')
+                }
+            });
+        }
+        function getRandomInt(min, max) {
+            min = Math.ceil(min)
+            max = Math.floor(max)
+            return Math.floor(Math.random() * (max - min)) + min
+        }
+    </script>
+    <style>
+        button {
+            width: 150px;
+            height: 100px;
+            font-size: 30px;
+        }
+    </style>
 </html>
