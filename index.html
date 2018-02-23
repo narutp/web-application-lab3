@@ -69,8 +69,10 @@
             if (choice == 1) {
                 if ($('#choice1').text() == answerArr[randomQuestionNumber]) {
                     score++
+                    spliceArray()
                     gameplay()
                 } else {
+                    spliceArray()
                     gameplay()
                     console.log($('#choice1').text())
                     console.log(answerArr[randomQuestionNumber]) 
@@ -80,8 +82,10 @@
             else if (choice == 2) {
                 if ($('#choice2').text() == answerArr[randomQuestionNumber]) {
                     score++
+                    spliceArray()
                     gameplay()
                 } else {
+                    spliceArray()
                     gameplay()
                     console.log($('#choice2').text())
                     console.log(answerArr[randomQuestionNumber])  
@@ -91,9 +95,11 @@
             else if (choice == 3) {
                 if ($('#choice3').text() == answerArr[randomQuestionNumber]) {
                     score++
+                    spliceArray()
                     gameplay()
                     console.log('true');
                 } else {
+                    spliceArray()
                     gameplay()
                     console.log($('#choice3').text())
                     console.log(answerArr[randomQuestionNumber]) 
