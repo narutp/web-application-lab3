@@ -8,33 +8,48 @@
         <title>Web application lab3</title>
     </head>
     <body>
-        <h1>Lightning game</h1>
-        <hr>
-        <button id="question5" onclick="question(5)">
-            5
-        </button>
-        <button id="question10" onclick="question(10)">
-            10
-        </button>
-        <button id="question15" onclick="question(15)">
-            15
-        </button>
-        <div class="gameplay">
-            <div id="question">
+        <div class="container">
+            <div class="header">
+                <h1>Lightning game</h1>
+                <h1 id="score">0</h1>
+                <hr>
+            </div>
+            <div class="startgame">
+                <div>
+                    <h3>Choosing number of question</h3>
+                </div>
                 
-            </div><hr>
-            <button id="choice1" onclick="submit(1)">
+                <button id="question5" onclick="generateQuestion(5)">
+                    5
+                </button>
+                <button id="question10" onclick="generateQuestion(10)">
+                    10
+                </button>
+                <button id="question15" onclick="generateQuestion(15)">
+                    15
+                </button>
+                <div>
+                    <h3>Total score: </h3><div class="totalscore"></div>
+                </div>
+            </div>
+            <div class="gameplay" style="display: none">
+                <div id="question">
+                    
+                </div><hr>
+                <button id="choice1" onclick="submit(1)">
 
-            </button>
-            <button id="choice2" onclick="submit(2)">
+                </button>
+                <button id="choice2" onclick="submit(2)">
 
-            </button>
-            <button id="choice3" onclick="submit(3)">
+                </button>
+                <button id="choice3" onclick="submit(3)">
 
-            </button>
+                </button>
+            </div>
         </div>
     </body>
     <script>
+        // initiate variable
         let randomQuestionNumber = 0;
         let numberQuestion = 0;
         let score = 0;
@@ -43,22 +58,31 @@
         let choice2Arr = [];
         let choice3Arr = [];
         let answerArr = [];
-        function question(params) {
+
+        // Generating question and call gameplay to start the game.
+        function generateQuestion(params) {
+            // set number of question
             numberQuestion = params
-            // while (numberQuestion > 0) {
-                $.get('list.json', function(data) {
-                    for (let i = 0 ; i < data.items.length ; i++) {
-                        questionArr[i] = data.items[i].question
-                        choice1Arr[i] = data.items[i].choice1
-                        choice2Arr[i] = data.items[i].choice2
-                        choice3Arr[i] = data.items[i].choice3
-                        answerArr[i] = data.items[i].answer
-                    }
-                    gameplay()
-                });
-            // }
+            $.get('list.json', function(data) {
+                for (let i = 0 ; i < data.items.length ; i++) {
+                    questionArr[i] = data.items[i].question
+                    choice1Arr[i] = data.items[i].choice1
+                    choice2Arr[i] = data.items[i].choice2
+                    choice3Arr[i] = data.items[i].choice3
+                    answerArr[i] = data.items[i].answer
+                }
+                $(".startgame").css("display", "none")
+                $(".gameplay").css("display", "block")
+                gameplay()
+            });
         }
         function gameplay() {
+            setTimeout(
+                function() { 
+                    numberQuestion--
+                    gameplay()
+                }, 15000
+            )
             randomQuestionNumber = getRandomInt(0, questionArr.length)
             $('#question').html(questionArr[randomQuestionNumber])
             $('#choice1').html(choice1Arr[randomQuestionNumber])
@@ -104,6 +128,7 @@
                     gameplay()
                 }
             }
+            $("#score").html(score)
             if (numberQuestion == 0) {
                 gameover()
             }
@@ -120,7 +145,11 @@
             return Math.floor(Math.random() * (max - min)) + min
         }
         function gameover() {
-            alert(score)
+            $(".gameplay").css("display", "none")
+            $(".startgame").css("display", "block")
+            $(".totalscore").html(score)
+            $("#score").html("0")
+            score = 0
         }
     </script>
     <style>
@@ -128,6 +157,20 @@
             width: 150px;
             height: 100px;
             font-size: 30px;
+        }
+        .gameplay {
+            margin-top: 30px;
+        }
+        #score {
+            right: 0px;
+            top: 0px;
+            margin-right: 30px;
+            position: absolute;
+        }
+        .totalscore {
+            font-size: 20px;
+            color: red;
+            margin-left: 50px;
         }
     </style>
 </html>
