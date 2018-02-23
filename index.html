@@ -35,7 +35,9 @@
             <div class="gameplay" style="display: none">
                 <div id="question">
                     
-                </div><hr>
+                </div>
+                <progress value="10" max="10" id="progressBar"></progress>
+                <hr>
                 <button id="choice1" onclick="submit(1)">
 
                 </button>
@@ -53,6 +55,7 @@
         let randomQuestionNumber = 0;
         let numberQuestion = 0;
         let score = 0;
+        let timer = 0;
         let questionArr = [];
         let choice1Arr = [];
         let choice2Arr = [];
@@ -77,12 +80,17 @@
             });
         }
         function gameplay() {
-            setTimeout(
-                function() { 
+            clearInterval(timer)
+            document.getElementById("progressBar").value = 10
+            let timeleft = 10
+            timer = setInterval(function() {
+                document.getElementById("progressBar").value = --timeleft
+                if (timeleft <= 0) {
+                    clearInterval(timer)
                     numberQuestion--
                     gameplay()
-                }, 15000
-            )
+                }
+            }, 1000)
             randomQuestionNumber = getRandomInt(0, questionArr.length)
             $('#question').html(questionArr[randomQuestionNumber])
             $('#choice1').html(choice1Arr[randomQuestionNumber])
