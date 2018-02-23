@@ -34,7 +34,7 @@
         </div>
     </body>
     <script>
-        let randomNumber = 0;
+        let randomQuestionNumber = 0;
         let numberQuestion = 0;
         let score = 0;
         let questionArr = [];
@@ -51,25 +51,62 @@
                         choice1Arr[i] = data.items[i].choice1
                         choice2Arr[i] = data.items[i].choice2
                         choice3Arr[i] = data.items[i].choice3
+                        answerArr[i] = data.items[i].answer
                     }
-                    let randomQuestionNumber = getRandomInt(0, questionArr.length)
-                    $('#question').html(questionArr[randomQuestionNumber])
-                    $('#choice1').html(choice1Arr[randomQuestionNumber])
-                    $('#choice2').html(choice2Arr[randomQuestionNumber])
-                    $('#choice3').html(choice3Arr[randomQuestionNumber])
-                    questionArr.splice(randomQuestionNumber, 1)
+                    gameplay()
                 });
-                numberQuestion--;
             // }
         }
-        function submit() {
-            $.get('list.json', function(data) {
-                if ($('#answer').val() == data.items[randomNumber].answer) {
-                    
+        function gameplay() {
+            randomQuestionNumber = getRandomInt(0, questionArr.length)
+            $('#question').html(questionArr[randomQuestionNumber])
+            $('#choice1').html(choice1Arr[randomQuestionNumber])
+            $('#choice2').html(choice2Arr[randomQuestionNumber])
+            $('#choice3').html(choice3Arr[randomQuestionNumber])
+            questionArr.splice(randomQuestionNumber, 1)
+        }
+        function submit(choice) {
+            if (choice == 1) {
+                if ($('#choice1').text() == answerArr[randomQuestionNumber]) {
+                    score++
+                    gameplay()
                 } else {
-                    console.log('false')
+                    gameplay()
+                    console.log($('#choice1').text())
+                    console.log(answerArr[randomQuestionNumber]) 
+                    console.log('false');
                 }
-            });
+            }
+            else if (choice == 2) {
+                if ($('#choice2').text() == answerArr[randomQuestionNumber]) {
+                    score++
+                    gameplay()
+                } else {
+                    gameplay()
+                    console.log($('#choice2').text())
+                    console.log(answerArr[randomQuestionNumber])  
+                    console.log('false');
+                }
+            }
+            else if (choice == 3) {
+                if ($('#choice3').text() == answerArr[randomQuestionNumber]) {
+                    score++
+                    gameplay()
+                    console.log('true');
+                } else {
+                    gameplay()
+                    console.log($('#choice3').text())
+                    console.log(answerArr[randomQuestionNumber]) 
+                    console.log('false');
+                }
+            }
+            console.log('Score' + score)
+        }
+        function spliceArray() {
+            choice1Arr.splice(randomQuestionNumber, 1)
+            choice2Arr.splice(randomQuestionNumber, 1)
+            choice3Arr.splice(randomQuestionNumber, 1)
+            answerArr.splice(randomQuestionNumber, 1)
         }
         function getRandomInt(min, max) {
             min = Math.ceil(min)

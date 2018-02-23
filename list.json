@@ -34,6 +34,76 @@
             "choice2": 5,
             "choice3": 3,
             "answer": 5
+        },
+        {
+            "question": "10 * (2 + 5)",
+            "choice1": 60,
+            "choice2": 25,
+            "choice3": 70,
+            "answer": 70
+        },
+        {
+            "question": "300 + 200",
+            "choice1": 400,
+            "choice2": 500,
+            "choice3": 300,
+            "answer": 500
+        },
+        {
+            "question": "42 / 2 + 5",
+            "choice1": 25,
+            "choice2": 26,
+            "choice3": 23,
+            "answer": 26
+        },
+        {
+            "question": "10 + 20",
+            "choice1": 30,
+            "choice2": 50,
+            "choice3": 31,
+            "answer": 30
+        },
+        {
+            "question": "Which of these are fruit?",
+            "choice1": "Airplane",
+            "choice2": "Airbnb",
+            "choice3": "Apple",
+            "answer": "Apple"
+        },
+        {
+            "question": "What football club is the best club in the world",
+            "choice1": "Liverpool",
+            "choice2": "Muangthong Utd",
+            "choice3": "Manchester United",
+            "answer": "Manchester United"
+        },
+        {
+            "question": "Which of these are color?",
+            "choice1": "Green",
+            "choice2": "Giraffe",
+            "choice3": "Gundam",
+            "answer": "Green"
+        },
+        {
+            "question": "110 + 100",
+            "choice1": 205,
+            "choice2": 210,
+            "choice3": 215,
+            "answer": 210
+        },
+        {
+            "question": "30 / 30",
+            "choice1": 3,
+            "choice2": 2,
+            "choice3": 1,
+            "answer": 1
+        },
+        {
+            "question": "200000 * 1534",
+            "choice1": 300500000,
+            "choice2": 306800000,
+            "choice3": 307500000,
+            "answer": 306800000
         }
     ]
 }
