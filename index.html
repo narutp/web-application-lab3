@@ -8,13 +8,13 @@
         <title>Web application lab3</title>
     </head>
     <body>
-        <button onclick="question(5)">
+        <button id="question5" onclick="question(5)">
             5
         </button>
-        <button onclick="question(10)">
+        <button id="question10" onclick="question(10)">
             10
         </button>
-        <button onclick="question(15)">
+        <button id="question15" onclick="question(15)">
             15
         </button>
         <div class="gameplay">
@@ -22,7 +22,13 @@
                 
             </div><hr>
             <input id="answer" type="text">
-            <button id="1">
+            <button id="choice1" onclick="submit(1)">
+
+            </button>
+            <button id="choice2" onclick="submit(2)">
+
+            </button>
+            <button id="choice3" onclick="submit(3)">
 
             </button>
         </div>
@@ -32,21 +38,29 @@
         let numberQuestion = 0;
         let score = 0;
         let questionArr = [];
+        let choice1Arr = [];
+        let choice2Arr = [];
+        let choice3Arr = [];
         let answerArr = [];
         function question(params) {
             numberQuestion = params
-            
-            while (numberQuestion > 0) {
+            // while (numberQuestion > 0) {
                 $.get('list.json', function(data) {
                     for (let i = 0 ; i < data.items.length ; i++) {
-                        questionArr[i] = data.items[i].question    
+                        questionArr[i] = data.items[i].question
+                        choice1Arr[i] = data.items[i].choice1
+                        choice2Arr[i] = data.items[i].choice2
+                        choice3Arr[i] = data.items[i].choice3
                     }
                     let randomQuestionNumber = getRandomInt(0, questionArr.length)
-                    document.getElementById('question').innerHTML = questionArr[randomQuestionNumber]
+                    $('#question').html(questionArr[randomQuestionNumber])
+                    $('#choice1').html(choice1Arr[randomQuestionNumber])
+                    $('#choice2').html(choice2Arr[randomQuestionNumber])
+                    $('#choice3').html(choice3Arr[randomQuestionNumber])
                     questionArr.splice(randomQuestionNumber, 1)
                 });
                 numberQuestion--;
-            }
+            // }
         }
         function submit() {
             $.get('list.json', function(data) {
