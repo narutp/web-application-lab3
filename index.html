@@ -67,47 +67,46 @@
             questionArr.splice(randomQuestionNumber, 1)
         }
         function submit(choice) {
+            
             if (choice == 1) {
                 if ($('#choice1').text() == answerArr[randomQuestionNumber]) {
                     score++
+                    numberQuestion--
                     spliceArray()
                     gameplay()
                 } else {
+                    numberQuestion--
                     spliceArray()
                     gameplay()
-                    console.log($('#choice1').text())
-                    console.log(answerArr[randomQuestionNumber]) 
-                    console.log('false');
                 }
             }
             else if (choice == 2) {
                 if ($('#choice2').text() == answerArr[randomQuestionNumber]) {
                     score++
+                    numberQuestion--
                     spliceArray()
                     gameplay()
                 } else {
+                    numberQuestion--
                     spliceArray()
                     gameplay()
-                    console.log($('#choice2').text())
-                    console.log(answerArr[randomQuestionNumber])  
-                    console.log('false');
                 }
             }
             else if (choice == 3) {
                 if ($('#choice3').text() == answerArr[randomQuestionNumber]) {
                     score++
+                    numberQuestion--
                     spliceArray()
                     gameplay()
-                    console.log('true');
                 } else {
+                    numberQuestion--
                     spliceArray()
                     gameplay()
-                    console.log($('#choice3').text())
-                    console.log(answerArr[randomQuestionNumber]) 
-                    console.log('false');
                 }
             }
-            console.log('Score' + score)
+            if (numberQuestion == 0) {
+                gameover()
+            }
         }
         function spliceArray() {
             choice1Arr.splice(randomQuestionNumber, 1)
@@ -119,6 +118,9 @@
             min = Math.ceil(min)
             max = Math.floor(max)
             return Math.floor(Math.random() * (max - min)) + min
+        }
+        function gameover() {
+            alert(score)
         }
     </script>
     <style>
