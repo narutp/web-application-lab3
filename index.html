@@ -30,7 +30,8 @@
                 <button type="button" class="btn btn-warning" id="question15" onclick="generateQuestion(15)">
                     15
                 </button>
-                <div>
+                <hr>
+                <div class="totalScore">
                     <h3>Total score: </h3><div class="totalscore"></div>
                 </div>
             </div>
@@ -50,6 +51,10 @@
 
                 </button>
             </div>
+            <footer class="footer">
+                <p>See source code at <a href="https://github.com/narutp/web-application-lab3">
+                Github</a>.</p>
+            </footer>
         </div>
     </body>
     <script>
@@ -180,6 +185,21 @@
         .container {
             padding: 30px;
         }
+        .footer {
+            width: 100%;
+            padding: 15px;
+            text-align: center;
+            background-color: #f3f3f3;
+            color: black;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+        .totalScore {
+            background-color: black;
+            color: white;
+            padding: 15px;
+        }
         .gameplay {
             margin-top: 30px;
         }
@@ -190,7 +210,7 @@
             position: absolute;
         }
         .totalscore {
-            font-size: 20px;
+            font-size: 30px;
             color: red;
             margin-left: 50px;
         }
