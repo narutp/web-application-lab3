@@ -10,6 +10,7 @@
     </head>
     <body>
         <div class="container">
+            <div class="loader" style="display: none"></div>
             <div class="header">
                 <h1>Lightning game</h1>
                 <h1 id="score">0</h1>
@@ -57,6 +58,7 @@
         let numberQuestion = 0;
         let score = 0;
         let timer = 0;
+        let timeLoad = 0;
         let questionArr = [];
         let choice1Arr = [];
         let choice2Arr = [];
@@ -65,6 +67,7 @@
 
         // Generating question and call gameplay to start the game.
         function generateQuestion(params) {
+            
             // set number of question
             numberQuestion = params
             $.get('list.json', function(data) {
@@ -76,11 +79,16 @@
                     answerArr[i] = data.items[i].answer
                 }
                 $(".startgame").css("display", "none")
-                $(".gameplay").css("display", "block")
-                gameplay()
+                $(".loader").css("display", "block")
+                timeLoad = setTimeout(gameplay, 3000)
             });
         }
         function gameplay() {
+            if (numberQuestion == 0) {
+                gameover()
+            }
+            $(".loader").css("display", "none")
+            $(".gameplay").css("display", "block")
             clearInterval(timer)
             document.getElementById("progressBar").value = 10
             let timeleft = 10
@@ -88,7 +96,11 @@
                 document.getElementById("progressBar").value = --timeleft
                 if (timeleft <= 0) {
                     clearInterval(timer)
+                    spliceArray()
                     numberQuestion--
+                    if (numberQuestion == 0) {
+                        gameover()
+                    }
                     gameplay()
                 }
             }, 1000)
@@ -98,6 +110,7 @@
             $('#choice2').html(choice2Arr[randomQuestionNumber])
             $('#choice3').html(choice3Arr[randomQuestionNumber])
             questionArr.splice(randomQuestionNumber, 1)
+            
         }
         function submit(choice) {
             
@@ -137,10 +150,10 @@
                     gameplay()
                 }
             }
-            $("#score").html(score)
             if (numberQuestion == 0) {
                 gameover()
             }
+            $("#score").html(score)
         }
         function spliceArray() {
             choice1Arr.splice(randomQuestionNumber, 1)
@@ -158,6 +171,8 @@
             $(".startgame").css("display", "block")
             $(".totalscore").html(score)
             $("#score").html("0")
+            clearTimeout(timeLoad)
+            clearInterval(timer)
             score = 0
         }
     </script>
@@ -178,6 +193,31 @@
             font-size: 20px;
             color: red;
             margin-left: 50px;
+        }
+        .loader {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            z-index: 1;
+            width: 150px;
+            height: 150px;
+            margin: -75px 0 0 -75px;
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #3498db;
+            width: 120px;
+            height: 120px;
+            -webkit-animation: spin 2s linear infinite;
+            animation: spin 2s linear infinite;
+        }
+        @-webkit-keyframes spin {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </html>
